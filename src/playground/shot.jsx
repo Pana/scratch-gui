@@ -21,13 +21,13 @@ if (process.env.NODE_ENV === 'production' && typeof window === 'object') {
 
 import styles from './player.css';
 
-const MCPROJECTHOST = 'http://localhost:3000';
+const MC_PROJECT_HOST = 'http://scratchp.mengchengedu.com';
 
 const generateShot = function () {
     const hashMatch = window.location.hash.match(/#(\d+)/);
     const hashProjectId = hashMatch === null ? 0 : hashMatch[1];
     html2canvas(document.querySelector("div[class^=stage-wrapper_stage-canvas-wrapper]")).then(canvas => {
-        axios.post(`${MCPROJECTHOST}/setProjectShot`, {
+        axios.post(`${MC_PROJECT_HOST}/setProjectShot`, {
             data: canvas.toDataURL(),
             id: hashProjectId
         }).then(result => {

@@ -133,8 +133,10 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         // assetHost: 'https://assets.scratch.mit.edu',
         // assetHost: 'http://47.56.140.30',
         // projectHost: 'https://projects.scratch.mit.edu',
-        assetHost: 'http://localhost:3000',
-        projectHost: 'http://localhost:3000'
+        // assetHost: 'http://localhost:3000',
+        // projectHost: 'http://localhost:3000',
+        assetHost: 'http://scrachp.mengchengedu.com',
+        projectHost: 'http://scrachp.mengchengedu.com'
     };
 
     const mapStateToProps = state => ({
