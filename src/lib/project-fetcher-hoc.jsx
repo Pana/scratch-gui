@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {intlShape, injectIntl} from 'react-intl';
 import bindAll from 'lodash.bindall';
 import {connect} from 'react-redux';
-import axios from 'axios';
+// import axios from 'axios';
 
 import {setProjectUnchanged} from '../reducers/project-changed';
 import {
@@ -71,14 +71,14 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         }
         fetchProject (projectId, loadingState) {
             // get project meta info
-            const metaUrl = `${this.props.projectHost}/projects/${projectId}`;
-            axios.get(metaUrl).then(response => {
-                // console.log('meta info', response);
-                this.props.setProjectMeta({
-                    author: response.data.creator,
-                    intro: response.data.intro
-                });
-            });
+            // const metaUrl = `${this.props.projectHost}/projects/${projectId}`;
+            // axios.get(metaUrl).then(response => {
+            //     // console.log('meta info', response);
+            //     this.props.setProjectMeta({
+            //         author: response.data.creator,
+            //         intro: response.data.intro
+            //     });
+            // });
             // load project data
             return storage
                 .load(storage.AssetType.Project, projectId, storage.DataFormat.JSON)
@@ -166,8 +166,8 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         onFetchedProjectData: (projectData, loadingState) =>
             dispatch(onFetchedProjectData(projectData, loadingState)),
         setProjectId: projectId => dispatch(setProjectId(projectId)),
-        onProjectUnchanged: () => dispatch(setProjectUnchanged()),
-        setProjectMeta: meta => dispatch(setProjectMeta(meta))
+        onProjectUnchanged: () => dispatch(setProjectUnchanged())
+        // setProjectMeta: meta => dispatch(setProjectMeta(meta))
     });
     // Allow incoming props to override redux-provided props. Used to mock in tests.
     const mergeProps = (stateProps, dispatchProps, ownProps) => Object.assign(

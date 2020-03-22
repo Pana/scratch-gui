@@ -162,7 +162,7 @@ module.exports = [
                 chunks: ['lib.min', 'player'],
                 template: 'src/playground/share.ejs',
                 filename: 'player.html',
-                title: 'Scratch 3.0 GUI: Player Example'
+                title: '萌程优秀作品分享'
             }),
             new HtmlWebpackPlugin({
                 chunks: ['lib.min', 'shot'],

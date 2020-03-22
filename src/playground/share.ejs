@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google" value="notranslate">
     <link rel="shortcut icon" href="static/favicon.ico">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
     <title><%= htmlWebpackPlugin.options.title %></title>
     <% if (htmlWebpackPlugin.options.sentryConfig) { %>
         <!-- Sentry error logging to help with finding bugs -->
@@ -16,31 +16,127 @@
         <!-- /Sentry -->
     <% } %>
     <style>
-      #scratch-player > div {
+      body {
+        margin: 0px;
+      }
+
+      .w482 {
+        width: 482px;
         margin-left: auto;
         margin-right: auto;
       }
 
-      html,body{
-        height: 100%;
+      #scratch-player {
+        position: relative;
       }
+
+      #scratch-player > div {
+        width: 482px;
+      }
+
+      #header{
+        width: 100%;
+        background-color: hsla(215, 100%, 65%, 1);
+        color: white;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        text-align: center;
+      }
+
+      #header .company-name {
+        font-size: 22px;
+        line-height: 50px;
+        vertical-align: middle;
+      }
+
+      #header img {
+        vertical-align: middle;
+      }
+
+      #p-title {
+        height: 50px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+      }
+
+      #p-title > div {
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      #p-title p {
+        margin-top: 0px;
+        margin-bottom: 0px;
+        color: #575e75;
+      }
+
+      #p-title #title {
+        font-size: 20px;
+      }
+
+      #p-title #author {
+        font-size: 14px;
+      }
+
+      #p-title .avatar {
+        display: none;
+      }
+
+      #intro {
+        display: none;
+      }
+
+      .d-block {
+        display: block !important;
+      }
+
+      .d-inline-b {
+        display: inline-block !important;
+      }
+
     </style>
   </head>
   <body>
-    <div class='container-fluid'>
-      <div class='row'>
-        <div class='col text-center'>
-          <p>
-            萌程优秀作品分享
-          </p>
-        </div>
+    <div id='header'>
+      <img src='http://mengchengedu.com/images/logo.png' width='50'/>
+      <span class='company-name'>萌程少儿编程</span>
+    </div>
+    <div id='p-title' class='w482'>
+      <div class='avatar'>
+        <img src="http://mcstatic.oss-cn-hangzhou.aliyuncs.com/avatar.gif" alt="" width='50'>
       </div>
-      <div class='row'>
-        <div class='col'>
-          <div id='scratch-player'></div>
-        </div>
+      <div style='margin-left: 10px;'>
+        <p id='title'></p>
+        <p id='author'></p>
       </div>
     </div>
+    <div id='scratch-player' class='w482'></div>
+    <div id='intro' class='w482'>
+      <p style='margin-bottom: 0px'>游戏说明：</p>
+      <p class='content'></p>
     </div>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+    <script>
+      $(function () {
+        console.log('inited');
+        var URL = 'http://scratchp.mengchengedu.com/projects/'
+        var id = window.location.hash.replace('#', '');
+        var $title = $('#title');
+        var $author = $('#author');
+        var $introContent = $('#intro .content');
+        var $intro = $('#intro');
+        var $avatar = $('#p-title .avatar');
+        if (id.length > 0) {
+          $.getJSON(URL + id, function(data) {
+            console.log('data', data);
+            $title.text(data.title);
+            $author.text('by ' + data.creator);
+            $introContent.text(data.intro);
+            $intro.addClass('d-block');
+            $avatar.addClass('d-inline-b');
+          });
+        }
+      });
+    </script>
   </body>
 </html>

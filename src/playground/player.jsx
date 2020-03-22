@@ -20,7 +20,7 @@ if (process.env.NODE_ENV === 'production' && typeof window === 'object') {
 
 import styles from './player.css';
 
-const Player = ({isPlayerOnly, onSeeInside, projectId, projectMeta}) => (
+const Player = ({isPlayerOnly, onSeeInside, projectId}) => (
     <Box className={classNames(isPlayerOnly ? styles.stageOnly : styles.editor)}>
         {/* {isPlayerOnly && <button onClick={onSeeInside}>{'See inside'}</button>} */}
         <GUI
@@ -29,20 +29,17 @@ const Player = ({isPlayerOnly, onSeeInside, projectId, projectMeta}) => (
             isPlayerOnly={isPlayerOnly}
             projectId={projectId}
         />
-        <p style={{marginTop: '1rem'}}>{`Author: ${projectMeta.author}`}</p>
     </Box>
 );
 
 Player.propTypes = {
     isPlayerOnly: PropTypes.bool,
     onSeeInside: PropTypes.func,
-    projectId: PropTypes.string,
-    projectMeta: PropTypes.object
+    projectId: PropTypes.string
 };
 
 const mapStateToProps = state => ({
-    isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
-    projectMeta: state.scratchGui.projectMeta
+    isPlayerOnly: state.scratchGui.mode.isPlayerOnly
 });
 
 const mapDispatchToProps = dispatch => ({

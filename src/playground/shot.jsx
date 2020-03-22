@@ -77,6 +77,7 @@ const WrappedPlayer = compose(
 )(ConnectedPlayer);
 
 const appTarget = document.createElement('div');
+appTarget.id = 's-player';
 document.body.appendChild(appTarget);
 
 ReactDOM.render(<WrappedPlayer isPlayerOnly />, appTarget);
