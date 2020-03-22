@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google" value="notranslate">
+    <link rel="shortcut icon" href="static/favicon.ico">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <% if (htmlWebpackPlugin.options.sentryConfig) { %>
+        <!-- Sentry error logging to help with finding bugs -->
+        <script src="https://cdn.ravenjs.com/3.22.1/raven.min.js" crossorigin="anonymous"></script>
+        <script>
+            Raven.config(<%= htmlWebpackPlugin.options.sentryConfig %>).install();
+        </script>
+        <!-- /Sentry -->
+    <% } %>
+    <style>
+      #scratch-player > div {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      html,body{
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class='container-fluid'>
+      <div class='row'>
+        <div class='col text-center'>
+          <p>
+            萌程优秀作品分享
+          </p>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col'>
+          <div id='scratch-player'></div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </body>
+</html>

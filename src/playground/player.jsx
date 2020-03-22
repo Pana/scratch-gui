@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -19,26 +20,29 @@ if (process.env.NODE_ENV === 'production' && typeof window === 'object') {
 
 import styles from './player.css';
 
-const Player = ({isPlayerOnly, onSeeInside, projectId}) => (
+const Player = ({isPlayerOnly, onSeeInside, projectId, projectMeta}) => (
     <Box className={classNames(isPlayerOnly ? styles.stageOnly : styles.editor)}>
-        {isPlayerOnly && <button onClick={onSeeInside}>{'See inside'}</button>}
+        {/* {isPlayerOnly && <button onClick={onSeeInside}>{'See inside'}</button>} */}
         <GUI
             canEditTitle
             enableCommunity
             isPlayerOnly={isPlayerOnly}
             projectId={projectId}
         />
+        <p style={{marginTop: '1rem'}}>{`Author: ${projectMeta.author}`}</p>
     </Box>
 );
 
 Player.propTypes = {
     isPlayerOnly: PropTypes.bool,
     onSeeInside: PropTypes.func,
-    projectId: PropTypes.string
+    projectId: PropTypes.string,
+    projectMeta: PropTypes.object
 };
 
 const mapStateToProps = state => ({
-    isPlayerOnly: state.scratchGui.mode.isPlayerOnly
+    isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
+    projectMeta: state.scratchGui.projectMeta
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -58,7 +62,4 @@ const WrappedPlayer = compose(
     HashParserHOC
 )(ConnectedPlayer);
 
-const appTarget = document.createElement('div');
-document.body.appendChild(appTarget);
-
-ReactDOM.render(<WrappedPlayer isPlayerOnly />, appTarget);
+ReactDOM.render(<WrappedPlayer isPlayerOnly />, document.getElementById('scratch-player'));
