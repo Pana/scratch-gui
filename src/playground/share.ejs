@@ -30,6 +30,13 @@
         position: relative;
       }
 
+      .scale {
+        transform: scale(0.8);
+        -moz-transform:scale(0.8);
+        -webkit-transform:scale(0.8);
+        -o-transform:scale(0.8);
+      }
+
       #scratch-player > div {
         width: 482px;
       }
@@ -128,6 +135,9 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
     <script>
       $(function () {
+        if(window.screen.width < 480) {
+          $('#scratch-player').addClass('scale');
+        }
         console.log('inited');
         var URL = 'http://scratchp.mengchengedu.com/projects/'
         var id = window.location.hash.replace('#', '');
