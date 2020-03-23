@@ -35,6 +35,10 @@
         -moz-transform:scale(0.8);
         -webkit-transform:scale(0.8);
         -o-transform:scale(0.8);
+        transform-origin:0% 0%;
+        -moz-transform-origin:0% 0%;
+        -webkit-transform-origin:0% 0%;
+        -o-transform-origin:0% 0%;
       }
 
       #scratch-player > div {
@@ -115,30 +119,36 @@
       <img src='http://mengchengedu.com/images/logo.png' width='50'/>
       <span class='company-name'>萌程少儿编程</span>
     </div>
-    <div class='prompt'>
+    <!-- <div class='prompt'>
       <span>手机横屏体验更佳</span>
-    </div>
-    <div id='p-title' class='w482'>
-      <div class='avatar'>
-        <img src="http://mcstatic.oss-cn-hangzhou.aliyuncs.com/avatar.gif" alt="" width='50'>
+    </div> -->
+    <div class='w482'>
+      <div id='p-title'>
+        <div class='avatar'>
+          <img src="http://mcstatic.oss-cn-hangzhou.aliyuncs.com/avatar.gif" alt="" width='50'>
+        </div>
+        <div style='margin-left: 10px;'>
+          <p id='title'></p>
+          <p id='author'></p>
+        </div>
       </div>
-      <div style='margin-left: 10px;'>
-        <p id='title'></p>
-        <p id='author'></p>
+      <div id='scratch-player'></div>
+      <div id='intro'>
+        <p style='margin-bottom: 0px'>游戏说明：</p>
+        <p class='content'></p>
       </div>
-    </div>
-    <div id='scratch-player' class='w482'></div>
-    <div id='intro' class='w482'>
-      <p style='margin-bottom: 0px'>游戏说明：</p>
-      <p class='content'></p>
     </div>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
     <script>
       $(function () {
-        if(window.screen.width < 480) {
-          $('#scratch-player').addClass('scale');
-        }
         console.log('inited');
+        // set scale for mobile device
+        if(window.screen.width < 480) {
+          var margin = (window.screen.width - 482 * 0.8) / 2;
+          $('.w482').addClass('scale').css('margin-left', margin);
+        }
+        
+        // set project data
         var URL = 'http://scratchp.mengchengedu.com/projects/'
         var id = window.location.hash.replace('#', '');
         var $title = $('#title');
@@ -148,7 +158,7 @@
         var $avatar = $('#p-title .avatar');
         if (id.length > 0) {
           $.getJSON(URL + id, function(data) {
-            console.log('data', data);
+            // console.log('data', data);
             $title.text(data.title);
             $author.text('by ' + data.creator);
             $introContent.text(data.intro);
