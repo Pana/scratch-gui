@@ -64,6 +64,7 @@ const getStageDimensions = (stageSize, isFullScreen) => {
 
         stageDimensions.scale = stageDimensions.width / stageDimensions.widthDefault;
     } else {
+        console.log('scales', STAGE_DISPLAY_SCALES, stageSize);
         stageDimensions.scale = STAGE_DISPLAY_SCALES[stageSize];
         stageDimensions.height = stageDimensions.scale * stageDimensions.heightDefault;
         stageDimensions.width = stageDimensions.scale * stageDimensions.widthDefault;

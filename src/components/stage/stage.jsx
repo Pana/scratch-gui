@@ -59,6 +59,7 @@ const StageComponent = props => {
                     }}
                 >
                     <DOMElementRenderer
+                        id={'stage-canvas-wrapper'}
                         domElement={canvas}
                         style={{
                             height: stageDimensions.height,

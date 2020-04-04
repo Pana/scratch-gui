@@ -10,6 +10,10 @@ const STAGE_SIZE_MODES = keyMirror({
      */
     large: null,
 
+    l1p25: null,
+
+    l1p5: null,
+
     /**
      * The "small stage" button is pressed; the user would like a small stage.
      */
@@ -26,6 +30,10 @@ const STAGE_DISPLAY_SIZES = keyMirror({
      */
     large: null,
 
+    l1p25: null,
+
+    l1p5: null,
+
     /**
      * Large stage with narrow browser
      */
@@ -38,6 +46,8 @@ const STAGE_DISPLAY_SIZES = keyMirror({
 });
 
 const STAGE_DISPLAY_SCALES = {};
+STAGE_DISPLAY_SCALES[STAGE_DISPLAY_SIZES.l1p25] = 1.25; // large mode, wide browser (standard)
+STAGE_DISPLAY_SCALES[STAGE_DISPLAY_SIZES.l1p5] = 1.5; // large mode, wide browser (standard)
 STAGE_DISPLAY_SCALES[STAGE_DISPLAY_SIZES.large] = 1; // large mode, wide browser (standard)
 STAGE_DISPLAY_SCALES[STAGE_DISPLAY_SIZES.largeConstrained] = 0.85; // large mode but narrow browser
 STAGE_DISPLAY_SCALES[STAGE_DISPLAY_SIZES.small] = 0.5; // small mode, regardless of browser size

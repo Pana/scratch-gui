@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === 'production' && typeof window === 'object') {
 import styles from './player.css';
 
 const Player = ({isPlayerOnly, onSeeInside, projectId}) => (
-    <Box className={classNames(isPlayerOnly ? styles.stageOnly : styles.editor)}>
+    <Box className={classNames(isPlayerOnly ? styles.stageOnly : styles.editor)} style={{width: window.IS_PC ? '720px' : '480px'}}>
         {/* {isPlayerOnly && <button onClick={onSeeInside}>{'See inside'}</button>} */}
         <GUI
             canEditTitle

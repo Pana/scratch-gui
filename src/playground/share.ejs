@@ -20,16 +20,6 @@
         margin: 0px;
       }
 
-      .w482 {
-        width: 482px;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      #scratch-player {
-        position: relative;
-      }
-
       .scale {
         transform: scale(0.8);
         -moz-transform:scale(0.8);
@@ -41,8 +31,23 @@
         -o-transform-origin:0% 0%;
       }
 
-      #scratch-player > div {
-        width: 482px;
+      .scale06 {
+        transform: scale(0.6);
+        -moz-transform:scale(0.6);
+        -webkit-transform:scale(0.6);
+        -o-transform:scale(0.6);
+        transform-origin:0% 0%;
+        -moz-transform-origin:0% 0%;
+        -webkit-transform-origin:0% 0%;
+        -o-transform-origin:0% 0%;
+      }
+
+      #scratch-player {
+        position: relative;
+      }
+
+      #scratch-player, #scratch-player > div {
+        width: 720px;
       }
 
       #header{
@@ -64,52 +69,92 @@
         vertical-align: middle;
       }
 
-      #p-title {
-        height: 50px;
-        padding-top: 15px;
-        padding-bottom: 15px;
-      }
-
-      #p-title > div {
-        display: inline-block;
-        vertical-align: middle;
-      }
-
-      #p-title p {
-        margin-top: 0px;
-        margin-bottom: 0px;
-        color: #575e75;
-      }
-
-      #p-title #title {
-        font-size: 20px;
-      }
-
-      #p-title #author {
-        font-size: 14px;
-      }
-
-      #p-title .avatar {
-        display: none;
-      }
-
-      #intro {
-        display: none;
-      }
-
-      .d-block {
-        display: block !important;
-      }
-
-      .d-inline-b {
-        display: inline-block !important;
-      }
-
-      .prompt {
+      /* .prompt {
         text-align: center;
         font-size: 12px;
         margin-top: 5px;
         color: gray;
+      } */
+
+      .main {
+        max-width: 1170px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-bottom: 80px;
+        /* position: relative; */
+      }
+
+      .main .title {
+        margin-bottom: 10px;
+      }
+
+      .main .left {
+        float: left;
+        width: 70%;
+      }
+
+      .main .right {
+        width: 30%;
+        float: right;
+      }
+
+      .main .author img, .main .author span {
+        vertical-align: middle;
+      }
+
+      .main .author {
+        color: #666;
+      }
+
+      .main .right >div {
+        margin-bottom: 50px;
+      }
+
+      .clearb {
+        clear: both;
+      }
+
+      .h80 {
+        height: 80px;
+      }
+
+      #qr-code {
+        height: 100px;
+        width: 100px;
+      }
+
+      .title, .detail {
+        /* display: none; */
+        visibility: hidden;
+      }
+
+      .show {
+        /* display: block !important; */
+        visibility: visible;
+      }
+
+      @media (max-width: 768px) {
+        .main .left,.main .right{
+          float: none;
+          width: auto;
+        }
+
+        .main .right {
+          margin-top: -60px;
+        }
+
+        #scratch-player, #scratch-player > div {
+          width: 480px;
+        }
+
+        .main .title, .project-show .detail {
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+
+        .updatedAt {
+          display: none;
+        }
       }
 
     </style>
@@ -122,50 +167,99 @@
     <!-- <div class='prompt'>
       <span>手机横屏体验更佳</span>
     </div> -->
-    <div class='w482'>
-      <div id='p-title'>
-        <div class='avatar'>
-          <img src="http://mcstatic.oss-cn-hangzhou.aliyuncs.com/avatar.gif" alt="" width='50'>
-        </div>
-        <div style='margin-left: 10px;'>
-          <p id='title'></p>
-          <p id='author'></p>
+    <div class='pc main'>
+      <div class='title'>
+        <h2 id='title'>加载中...</h2>
+        <div class='author'>
+          <img id='avatar' src="http://mcstatic.oss-cn-hangzhou.aliyuncs.com/avatar.gif" alt="" width='30'>
+          <span id='author'></span>
+          &nbsp;&nbsp;
+          <span class='createdAt'>发布于：</span><span class='createdAt' id='createdAt'></span>
+          &nbsp;&nbsp;
+          <span class='updatedAt'>更新于：</span><span class='updatedAt' id='updatedAt'></span>
         </div>
       </div>
-      <div id='scratch-player'></div>
-      <div id='intro'>
-        <p style='margin-bottom: 0px'>游戏说明：</p>
-        <p class='content'></p>
+      <div class='project-show'>
+        <div class='left'>
+          <div id='scratch-player'></div>
+        </div>
+        <div class='right detail'>
+          <div>
+            <h4>作品简介</h4>
+            <p id='project-intro'></p>
+          </div>
+          <div>
+            <h4>操作说明</h4>
+            <p id='project-howto'></p>
+          </div>
+          <div>
+            <h4>作品二维码</h4>
+            <div id='qr-code'>
+            </div>
+          </div>
+        </div>
+        <div class='clearb'></div>
       </div>
     </div>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+    <script src='http://mcstatic.oss-cn-hangzhou.aliyuncs.com/jquery.qrcode.min.js'></script>
     <script>
+      var IS_PC = false;
+      if(window.screen.width > 768) {
+        IS_PC = true;
+      }
+      
       $(function () {
         console.log('inited');
-        // set scale for mobile device
-        if(window.screen.width < 480) {
-          var margin = (window.screen.width - 482 * 0.8) / 2;
-          $('.w482').addClass('scale').css('margin-left', margin);
-        }
-        
-        // set project data
-        var URL = 'http://scratchp.mengchengedu.com/projects/'
         var id = window.location.hash.replace('#', '');
-        var $title = $('#title');
-        var $author = $('#author');
-        var $introContent = $('#intro .content');
-        var $intro = $('#intro');
-        var $avatar = $('#p-title .avatar');
-        if (id.length > 0) {
-          $.getJSON(URL + id, function(data) {
-            // console.log('data', data);
-            $title.text(data.title);
-            $author.text('by ' + data.creator);
-            $introContent.text(data.intro);
-            $intro.addClass('d-block');
-            $avatar.addClass('d-inline-b');
-          });
+
+        // init qr-code
+        $('#qr-code').qrcode({
+          width: 100,
+          height: 100,
+          text: "http://scratch.mengchengedu.com/player.html#" + id
+        });
+        
+        // set scale for mobile device
+        if(!IS_PC) {
+          var $player = $('#scratch-player');
+          $player.addClass('scale');
+          var margin = (window.screen.width - 482 * 0.8) / 2;
+          $player.addClass('scale').css('margin-left', margin);
         }
+
+        loadProjectInfo();
+        loadUserInfo();
+
+        function loadProjectInfo() {
+          // set project data
+          var URL = 'http://scratchp.mengchengedu.com/projects/'
+          var $title = $('#title');
+          var $intro = $('#project-intro');
+          var $howto = $('#project-howto');
+          var $createdAt = $('#createdAt');
+          var $updatedAt = $('#updatedAt');
+          if (id.length > 0) {
+            $.getJSON(URL + id, function(data) {
+              // console.log('data', data);
+              $title.text(data.title);
+              $intro.text(data.intro);
+              $howto.text(data.howToPlay);
+              $createdAt.text(new Date(data.createdAt).toLocaleString());
+              $updatedAt.text(new Date(data.updatedAt).toLocaleString());
+              $('.title,.detail').addClass('show');
+            });
+          }
+        }
+
+        function loadUserInfo() {
+          var $author = $('#author');
+          var $avatar = $('#avatar');
+          $author.text('小余');
+          $avatar.attr('src', 'http://mcstatic.oss-cn-hangzhou.aliyuncs.com/avatar.gif');
+        }
+
+
       });
     </script>
   </body>

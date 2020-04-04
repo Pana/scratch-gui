@@ -26,7 +26,8 @@ const MC_PROJECT_HOST = 'http://scratchp.mengchengedu.com';
 const generateShot = function () {
     const hashMatch = window.location.hash.match(/#(\d+)/);
     const hashProjectId = hashMatch === null ? 0 : hashMatch[1];
-    html2canvas(document.querySelector("div[class^=stage-wrapper_stage-canvas-wrapper]")).then(canvas => {
+    const canvas = document.getElementById('stage-canvas-wrapper');
+    html2canvas(canvas).then(canvas => {
         axios.post(`${MC_PROJECT_HOST}/setProjectShot`, {
             data: canvas.toDataURL(),
             id: hashProjectId

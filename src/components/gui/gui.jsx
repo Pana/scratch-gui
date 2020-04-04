@@ -143,7 +143,7 @@ const GUIComponent = props => {
                 isRendererSupported={isRendererSupported}
                 isRtl={isRtl}
                 loading={loading}
-                stageSize={STAGE_SIZE_MODES.large}
+                stageSize={window.IS_PC ? STAGE_SIZE_MODES.l1p5 : STAGE_SIZE_MODES.large}
                 vm={vm}
             >
                 {alertsVisible ? (
