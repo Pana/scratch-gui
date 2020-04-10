@@ -229,8 +229,7 @@
         }
 
         loadProjectInfo();
-        loadUserInfo();
-
+        
         function loadProjectInfo() {
           // set project data
           var URL = 'http://scratchp.mengchengedu.com/projects/'
@@ -241,22 +240,36 @@
           var $updatedAt = $('#updatedAt');
           if (id.length > 0) {
             $.getJSON(URL + id, function(data) {
-              // console.log('data', data);
+              // console.log('ProjectInfo', data);
               $title.text(data.title);
               $intro.text(data.intro);
               $howto.text(data.howToPlay);
               $createdAt.text(new Date(data.createdAt).toLocaleString());
               $updatedAt.text(new Date(data.updatedAt).toLocaleString());
               $('.title,.detail').addClass('show');
+              if(data.creatorID > 0) {
+                loadUserInfo(data.creatorID);
+              } else {
+                setDefaultUserInfo();
+              }
             });
           }
         }
 
-        function loadUserInfo() {
+        function setDefaultUserInfo() {
+          $author.text('');
+          $avatar.attr('src', 'http://mcstatic.oss-cn-hangzhou.aliyuncs.com/avatar.gif');
+        }
+
+        function loadUserInfo(userID) {
+          var URL = 'http://mengchengedu.com:9002/actionapi/MenHu/GetUserInfoByID?id='+userID;
           var $author = $('#author');
           var $avatar = $('#avatar');
-          $author.text('小余');
-          $avatar.attr('src', 'http://mcstatic.oss-cn-hangzhou.aliyuncs.com/avatar.gif');
+          $.getJSON(URL, function(data, status, xhr) {
+            // console.log('userInfo', data);
+            $author.text(data.name);
+            $avatar.attr('src', data.avatar);
+          }).fail(setDefaultUserInfo);
         }
 
 
