@@ -133,6 +133,10 @@
         visibility: visible;
       }
 
+      .ad-button-wrapper {
+        display: none;
+      }
+
       @media (max-width: 768px) {
         .main .left,.main .right{
           float: none;
@@ -154,6 +158,33 @@
 
         .updatedAt {
           display: none;
+        }
+
+        .ad-button-wrapper {
+          display: block;
+        }
+
+        /* .ad-button-wrapper a {
+          display: block;
+          width:100%;
+        } */
+
+        .ad-button-wrapper button {
+          width: 150px;
+          background-color: hsla(215, 100%, 65%, 1);
+          color: white;
+          border: none;
+          border-radius: 15px;
+          display: block;
+          height: 30px;
+          position: fixed;
+          bottom: 50px;
+          left: 50%;
+          margin-left: -75px;
+        }
+
+        .ad-button-wrapper a {
+          text-decoration: none;
         }
       }
 
@@ -199,6 +230,13 @@
           </div>
         </div>
         <div class='clearb'></div>
+      </div>
+      <div class='ad-button-wrapper'>
+        <a href="http://mengchengedu.com">
+          <button class='ad-button'>
+          了解萌程教育
+          </button>
+        </a>
       </div>
     </div>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
