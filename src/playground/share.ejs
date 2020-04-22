@@ -133,8 +133,22 @@
         visibility: visible;
       }
 
-      .ad-button-wrapper {
+      .ad-button-wrapper.mobile {
         display: none;
+      }
+
+      .ad-button-wrapper button {
+          width: 150px;
+          background-color: hsla(215, 100%, 65%, 1);
+          color: white;
+          border: none;
+          border-radius: 15px;
+          display: block;
+          height: 30px;
+      }
+
+      .ad-button-wrapper a {
+        text-decoration: none;
       }
 
       @media (max-width: 768px) {
@@ -160,8 +174,12 @@
           display: none;
         }
 
-        .ad-button-wrapper {
+        .ad-button-wrapper.mobile {
           display: block;
+        }
+
+        .ad-button-wrapper .pc {
+          display: none;
         }
 
         /* .ad-button-wrapper a {
@@ -170,22 +188,13 @@
         } */
 
         .ad-button-wrapper button {
-          width: 150px;
-          background-color: hsla(215, 100%, 65%, 1);
-          color: white;
-          border: none;
-          border-radius: 15px;
-          display: block;
-          height: 30px;
           position: fixed;
           bottom: 50px;
           left: 50%;
           margin-left: -75px;
         }
 
-        .ad-button-wrapper a {
-          text-decoration: none;
-        }
+        
       }
 
     </style>
@@ -228,10 +237,17 @@
             <div id='qr-code'>
             </div>
           </div>
+          <div class='ad-button-wrapper pc'>
+            <a href="http://mengchengedu.com">
+              <button class='ad-button'>
+              了解萌程教育
+              </button>
+            </a>
+          </div>
         </div>
         <div class='clearb'></div>
       </div>
-      <div class='ad-button-wrapper'>
+      <div class='ad-button-wrapper mobile'>
         <a href="http://mengchengedu.com">
           <button class='ad-button'>
           了解萌程教育
