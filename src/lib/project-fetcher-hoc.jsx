@@ -16,7 +16,7 @@ import {
     projectError,
     setProjectId
 } from '../reducers/project-state';
-import {setProjectMeta} from '../reducers/project-meta';
+// import {setProjectMeta} from '../reducers/project-meta';
 import {
     activateTab,
     BLOCKS_TAB_INDEX
@@ -24,6 +24,7 @@ import {
 
 import log from './log';
 import storage from './storage';
+import {ASSET_HOST, PROJECT_HOST} from '../config';
 
 /* Higher Order Component to provide behavior for loading projects by id. If
  * there's no id, the default project is loaded.
@@ -143,13 +144,8 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         setProjectId: PropTypes.func
     };
     ProjectFetcherComponent.defaultProps = {
-        // assetHost: 'https://assets.scratch.mit.edu',
-        // assetHost: 'http://47.56.140.30',
-        // projectHost: 'https://projects.scratch.mit.edu',
-        // assetHost: 'http://localhost:3000',
-        // projectHost: 'http://localhost:3000',
-        assetHost: 'http://scratchp.mengchengedu.com',
-        projectHost: 'http://scratchp.mengchengedu.com'
+        assetHost: ASSET_HOST,
+        projectHost: PROJECT_HOST
     };
 
     const mapStateToProps = state => ({

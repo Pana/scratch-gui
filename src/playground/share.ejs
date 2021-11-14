@@ -266,6 +266,8 @@
       $(function () {
         console.log('inited');
         var id = window.location.hash.replace('#', '');
+        var $author = $('#author');
+        var $avatar = $('#avatar');
 
         // init qr-code
         $('#qr-code').qrcode({
@@ -317,8 +319,6 @@
 
         function loadUserInfo(userID) {
           var URL = 'http://mengchengedu.com:9002/actionapi/MenHu/GetUserInfoByID?id='+userID;
-          var $author = $('#author');
-          var $avatar = $('#avatar');
           $.getJSON(URL, function(data, status, xhr) {
             // console.log('userInfo', data);
             $author.text(data.name);

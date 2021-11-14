@@ -1,17 +1,22 @@
 # scratch-gui
-#### Scratch GUI is a set of React components that comprise the interface for creating and running Scratch 3.0 projects
+
+## Scratch GUI is a set of React components that comprise the interface for creating and running Scratch 3.0 projects
 
 [![Build Status](https://travis-ci.com/LLK/scratch-gui.svg?token=Yfq2ryN1BwaxDME69Lnc&branch=master)](https://travis-ci.com/LLK/scratch-gui)
 [![Greenkeeper badge](https://badges.greenkeeper.io/LLK/scratch-gui.svg)](https://greenkeeper.io/)
 
 ## Installation
+
 This requires you to have Git and Node.js installed.
 
 In your own node environment/application:
-```bash
+
+```sh
 npm install https://github.com/LLK/scratch-gui.git
 ```
+
 If you want to edit/play yourself:
+
 ```bash
 git clone https://github.com/LLK/scratch-gui.git
 cd scratch-gui
@@ -20,20 +25,27 @@ npm install
 
 **You may want to add `--depth=1` to the `git clone` command because there are some [large files in the git repository history](https://github.com/LLK/scratch-gui/issues/5140).**
 
+## 如何配置 Scratch 项目的后端服务
+
+配置 `src/config.js` 文件的 ASSET_HOST, PROJECT_HOST 服务地址，改为 scratch_projects_backend 服务地址
+
 ## Getting started
+
 Running the project requires Node.js to be installed.
 
 ## Running
+
 Open a Command Prompt or Terminal in the repository and run:
+
 ```bash
 npm start
 ```
+
 Then go to [http://localhost:8601/](http://localhost:8601/) - the playground outputs the default GUI component
 
 ## Developing alongside other Scratch repositories
 
 ### Getting another repo to point to this code
-
 
 If you wish to develop `scratch-gui` alongside other scratch repositories that depend on it, you may wish
 to have the other repositories use your local `scratch-gui` build instead of fetching the current production
@@ -66,6 +78,7 @@ If you can't get linking to work right, try:
 * If nothing else works, unlink the repositories by running `npm unlink` in both, and start over.
 
 ## Testing
+
 ### Documentation
 
 You may want to review the documentation for [Jest](https://facebook.github.io/jest/docs/en/api.html) and [Enzyme](http://airbnb.io/enzyme/docs/api/) as you write your tests.
@@ -81,6 +94,7 @@ Before running any tests, make sure you have run `npm install` from this (scratc
 #### Main testing command
 
 To run linter, unit tests, build, and integration tests, all at once:
+
 ```bash
 npm test
 ```
@@ -88,11 +102,13 @@ npm test
 #### Running unit tests
 
 To run unit tests in isolation:
+
 ```bash
 npm run test:unit
 ```
 
 To run unit tests in watch mode (watches for code changes and continuously runs tests):
+
 ```bash
 npm run test:unit -- --watch
 ```
@@ -138,14 +154,14 @@ USE_HEADLESS=no $(npm bin)/jest --runInBand test/integration/backpack.test.js
 
 When running `npm install`, you can get warnings about optionsl dependencies:
 
-```
+```sh
 npm WARN optional Skipping failed optional dependency /chokidar/fsevents:
 npm WARN notsup Not compatible with your operating system or architecture: fsevents@1.2.7
 ```
 
 You can suppress them by adding the `no-optional` switch:
 
-```
+```sh
 npm install --no-optional
 ```
 
@@ -155,7 +171,7 @@ Further reading: [Stack Overflow](https://stackoverflow.com/questions/36725181/n
 
 When installing for the first time, you can get warnings which need to be resolved:
 
-```
+```bash
 npm WARN eslint-config-scratch@5.0.0 requires a peer of babel-eslint@^8.0.1 but none was installed.
 npm WARN eslint-config-scratch@5.0.0 requires a peer of eslint@^4.0 but none was installed.
 npm WARN scratch-paint@0.2.0-prerelease.20190318170811 requires a peer of react-intl-redux@^0.7 but none was installed.
@@ -164,19 +180,19 @@ npm WARN scratch-paint@0.2.0-prerelease.20190318170811 requires a peer of react-
 
 You can check which versions are available:
 
-```
+```bash
 npm view react-intl-redux@0.* version
 ```
 
 You will neet do install the required version:
 
-```
+```bash
 npm install  --no-optional --save-dev react-intl-redux@^0.7
 ```
 
 The dependency itself might have more missing dependencies, which will show up like this:
 
-```
+```bash
 user@machine:~/sources/scratch/scratch-gui (491-translatable-library-objects)$ npm install  --no-optional --save-dev react-intl-redux@^0.7
 scratch-gui@0.1.0 /media/cuideigin/Linux/sources/scratch/scratch-gui
 ├── react-intl-redux@0.7.0
@@ -185,14 +201,14 @@ scratch-gui@0.1.0 /media/cuideigin/Linux/sources/scratch/scratch-gui
 
 You will need to install those as well:
 
-```
+```bash
 npm install  --no-optional --save-dev react-responsive@^5.0.0
 ```
 
 Further reading: [Stack Overflow](https://stackoverflow.com/questions/46602286/npm-requires-a-peer-of-but-all-peers-are-in-package-json-and-node-modules)
 
-
 ## Publishing to GitHub Pages
+
 You can publish the GUI to github.io so that others on the Internet can view it.
 [Read the wiki for a step-by-step guide.](https://github.com/LLK/scratch-gui/wiki/Publishing-to-GitHub-Pages)
 
@@ -252,4 +268,5 @@ Here's what will happen in the project state machine:
 7. The `SHOWING_WITH_ID` state. Now the project appears normally and is playable and editable.
 
 ## Donate
+
 We provide [Scratch](https://scratch.mit.edu) free of charge, and want to keep it that way! Please consider making a [donation](https://secure.donationpay.org/scratchfoundation/) to support our continued engineering, design, community, and resource development efforts. Donations of any size are appreciated. Thank you!
